@@ -9,15 +9,14 @@ Vue.component("todo", {
 
 <div class="form">
 <form @submit.prevent="onSubmit">
-<label for="name">название</label> <input type="text" id="name" > 
+<label for="name"></label> <input type="text" id="name" placeholder="название " > 
+<label for="item_1"></label> <input type="text" id="item_1" placeholder="задача 1"> 
+<label for="item_2"></label> <input type="text" id="item_2" placeholder="задача 2" > 
+<label for="item_3"></label> <input type="text" id="item_3" placeholder="задача 3"> 
+<label for="item_4"></label> <input type="text" id="item_4" placeholder="задача 4"> 
+<label for="item_5"></label> <input type="text" id="item_5" placeholder="задача 5"> 
 
-<label for="item_1">задача 1</label> <input type="text" id="item_1" > 
-<label for="item_2">задача 2</label> <input type="text" id="item_2" > 
-<label for="item_3">задача 3</label> <input type="text" id="item_3" > 
-<label for="item_4">задача 4</label> <input type="text" id="item_4" > 
-<label for="item_5">задача 5</label> <input type="text" id="item_5" > 
-
-<button type="submit" class="btr" value="Submit">добавить</button>
+<button type="submit" class="btr" value="Submit">ДОБАВИТЬ</button>
 
 </form>
 <ul>
@@ -28,7 +27,7 @@ Vue.component("todo", {
 <ul  id="cols">
 <li  class="col">
 <ul class="cards">
-<li class="col_2">efwaef</li>
+<li class="col_1">dbcjkSBjkb</li>
 </ul>
 </li>
 
