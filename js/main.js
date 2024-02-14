@@ -25,23 +25,20 @@ Vue.component("todo", {
 </div>
 
 <ul  id="cols">
-<li  class="col">
 <ul class="cards">
+<h3 class="title">vsjehfj</h3>
 <li class="col_1">dbcjkSBjkb</li>
 </ul>
-</li>
 
-<li class="col">
 <ul>
+<h3 class="title">vsjehfj</h3>
 <li class="col_2">efwaef</li>
 </ul>
-</li>
 
-<li class="col">
 <ul>
+<h3 class="title">vsjehfj</h3>
 <li  class="col_3">awefwaef</li>
 </ul>
-</li>
 
 </ul>
 </div>
@@ -206,6 +203,22 @@ Vue.component("todo", {
  
 });
 
+Vue.component("card", {
+    template: `
+    <div class="card">
+    <h4>{{name}}</h4>
+    <ul>
+    <li>dhvshjrg</li>
+    </ul>
+    <p>{{date}}</p>
+    </div>
+    `,
+    data(){
+        return{}
+    },
+    
+
+})
 
 
 
