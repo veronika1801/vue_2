@@ -17,7 +17,9 @@ Vue.component("todo", {
 <label for="item4"></label> <input type="text" id="item4" v-model="item4" placeholder="задача 4"> 
 <label for="item5"></label> <input type="text" id="item5" v-model="item5" placeholder="задача 5"> 
 
-<button type="submit" class="but" value="Submit">Создать</button>
+<p>
+    <input class="but"type="submit" value="СОЗДАТЬ">
+</p>
 
 
 
@@ -32,6 +34,7 @@ Vue.component("todo", {
 
 <ul  id="columns">
 <li  class="column">
+<h2>0% выполнено</h2>
 <ul class="cards">
 <li v-for="card in column1"><card :name="card.name" :column=1 :block="blockOne" :card_id="card.card_id" :count_of_checked="card.count_of_checked" :items="card.items" @to-two="toColumnTwo" >   </card></li>
 </ul>
@@ -39,6 +42,7 @@ Vue.component("todo", {
 
 
 <li class="column">
+<h2>50% выполнено</h2>
 <ul class="cards">
 <li  v-for="card in column2"><card :name="card.name" :column=2 :block=false :card_id="card.card_id" :count_of_checked="card.count_of_checked" :items="card.items" @to-three="toColumnThree" @to-one="toColumnOne" >  ></card></li>
 </ul>
@@ -47,6 +51,7 @@ Vue.component("todo", {
 
 
 <li class="column">
+<h2>100% выполнено</h2>
 <ul class="cards">
 <li  v-for="card in column3"><card class="done_card" :name="card.name" :pblock=true :dat="card.dat" :card_id="card.card_id" :column=3 :items="card.items" ></card></li>
 </ul>
@@ -256,7 +261,7 @@ Vue.component("card", {
 <li v-for="item in items"><task :block="block" :item="item[0]" :pblock="pblock" :done="item[1]" @checked="updatechecked" @updatetwo="updatetwo"></task></li>
 </ul>
 
-<p>{{dat}}</p>
+<p class="date">{{dat}}</p>
 </div>
     `,
     data() {
