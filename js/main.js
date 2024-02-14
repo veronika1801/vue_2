@@ -181,12 +181,12 @@ Vue.component("todo", {
         eventBus.$emit('checkTwo',checks) 
 
     },
-    toColThree(name, items, card_id, now){
+    toColThree(name, items, card_id){
         let info={
             name:name,
             card_id:card_id,
             items:items,
-            date:now
+            
         }
         for(i in this.col_2){
             if(this.col_2[i].card_id==card_id){
@@ -210,13 +210,32 @@ Vue.component("card", {
     <ul>
     <li>dhvshjrg</li>
     </ul>
-    <p>{{date}}</p>
+    
     </div>
     `,
     data(){
         return{}
     },
-    
+    methods:{
+        updatechecked(item){
+            this.count_of_checked+=1;
+            for(i in this.items){
+                if(this.items[i][0]==item && this.items[i][1]!=true){
+                    this.items[i][1]=true
+                    break
+                }
+            }
+            if((this.count_of_task)==(this.count_of_checked)){
+                
+                console.log(this.name, this.items, this.card_id)
+                this.$emit("to-three", this.name, this.items, this.card_id);
+            }
+            else if((this.count_of_task/2)<=(this.count_of_checked)){
+                this.$emit("to-two",this.name, this.items, this.card_id, this.count_of_checked);
+            }
+        },
+        
+    }
 
 })
 
