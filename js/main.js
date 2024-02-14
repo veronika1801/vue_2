@@ -39,7 +39,7 @@ Vue.component("todo", {
 
 
 <li class="column">
-<ul>
+<ul class="cards">
 <li  v-for="card in column2"><card :name="card.name" :column=2 :block=false :card_id="card.card_id" :count_of_checked="card.count_of_checked" :items="card.items" @to-three="toColumnThree" @to-one="toColumnOne" >  ></card></li>
 </ul>
 </li>
@@ -47,7 +47,7 @@ Vue.component("todo", {
 
 
 <li class="column">
-<ul>
+<ul class="cards">
 <li  v-for="card in column3"><card class="done_card" :name="card.name" :pblock=true :dat="card.dat" :card_id="card.card_id" :column=3 :items="card.items" ></card></li>
 </ul>
 </li>
@@ -151,16 +151,16 @@ Vue.component("todo", {
             }
             
             if(this.items.length < 3){
-                this.errors.push("Должно быть заполнено от 3 пунктов")
+                this.errors.push(" ОТ 3 ЗАДАЧ")
             }
             if(!this.name){
-                this.errors.push("Не введён заголовок")
+                this.errors.push("ВВЕДИТЕ НАЗВАНИЕ")
             }
             if(this.column1.length >=3){
-                this.errors.push("Достигнуто максимальное число карточек")                
+                this.errors.push("ВЫПОЛНИТЕ ЗАДАЧИ В 1 СТОЛБЦЕ")                
             }
             if(this.blockOne){
-                this.errors.push("Второй столбец переполнен")
+                this.errors.push("ВЫПОЛНИТЕ ЗАДАЧИ ВО 2 СТОЛБЦЕ")
             }
             if(this.errors.length==0){
                 let info = {
@@ -252,7 +252,7 @@ Vue.component("card", {
     template: `
 <div class="card">
 <h3>{{name}}</h3>
-<ul >
+<ul class="card_ul">
 <li v-for="item in items"><task :block="block" :item="item[0]" :pblock="pblock" :done="item[1]" @checked="updatechecked" @updatetwo="updatetwo"></task></li>
 </ul>
 

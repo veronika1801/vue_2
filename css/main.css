@@ -1,100 +1,92 @@
 body{
     width: 100%;
-    flex-grow:1;
+    background-color: rgb(242, 224, 253);
+    
+   
 }
-
-#columns{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 100%;  
-    width: 100%; 
-}
-
-.column{
-    min-height: 1000px;
-    text-align: center;
-    padding: 10px;
-    margin: 10px;
-    width: 400px;
-    height: 100%;
-    background-color: #686868;
-    border: 2px solid #00B897;
-    flex-grow:1;
-
-}
-.error{
-    font-weight: bolder;
-    padding: 10px 0;
-    margin: 0;
-}
-.form{
+.board{
     display: flex;
     flex-direction: row;   
-    justify-content: center;
-    align-items: center;
-    gap: 20px
 }
-
+.form{
+    width: 250px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    height: 400px;
+    margin-top: 35px;
+    
+}
 form{
     display: flex;
     flex-direction: column;
-    min-width: 15%;
+    justify-content: center;
     align-items: center;
-    border: 2px solid #00B897;
-    border-radius: 5px;
-    padding-bottom: 20px;
-    background-color: white;
-    color: #00B897  ;
+    gap: 10px;
+}
+.but{
+    background-color: rgb(248, 172, 255);
+    border: none;
+    height: 30px;
+    width: 235px;
+    border-radius: 7px;
+    
+    
 }
 input{
-    max-width: 90%;
-    border-radius: 4px;
+    height: 30px;
+    width: 230px;
+    border-radius: 7px;
+    border: 1px solid black;
 }
-
-label{
-    padding: 10px 5px 5px 10px;
-}
-
-ul{
+#columns{
+    display: flex;
+    flex-direction: row; 
     list-style-type: none;
-    padding: 0;
+    
+    
+}
+.column{
+    background-color: white;
+    width: 300px;
+    
+    min-height: 500px;
+    border-radius: 20px;
+    list-style-type: none;
+    margin-left: 40px;
+}
+.todo{
+    display: flex;
+    flex-direction: row; 
+}
+.card{
+    background-color: rgb(239, 239, 239);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    gap: 20px;
+    user-select: none;
+    color: rgb(64, 64, 64);
+    margin-top: 20px;
+    
+}
+.cards{
+    padding: 40px;
+    
+}
+.done{
+    text-decoration: line-through;
+}
+.error{
+    color: red;
+}
+h3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 li{
-    margin-top: 5px;
-}
-
-.done{
-    color: #00B897;
-}
-
-.card{
-    border: 2px solid #00B897;
-    border-radius: 4px;
-    background-color: white;
-    user-select: none;
-}
-
-.input{
-    outline: none;
-}
-
-.but{
-    background-color: #00B897;
-    border: none;
-    margin-top: 5px;
-    font-size: 20px;
-    color: white;
-}
-
-.clear{
-    background-color: #00B897;
-    border: none;
-    font-size: 20px;
-    color: white;
-    margin-top: 20px;
-}
-
-h3{
-    border-bottom: 2px dashed #00B897;
+    list-style-type: none;
 }
