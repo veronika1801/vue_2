@@ -5,254 +5,427 @@ let eventBus = new Vue()
 Vue.component("todo", {
     template: `
     
-<div class="board">
+<div class="todo">
 
 <div class="form">
 <form @submit.prevent="onSubmit">
-<label for="name"></label> <input type="text" id="name" placeholder="название " > 
-<label for="item_1"></label> <input type="text" id="item_1" placeholder="задача 1"> 
-<label for="item_2"></label> <input type="text" id="item_2" placeholder="задача 2" > 
-<label for="item_3"></label> <input type="text" id="item_3" placeholder="задача 3"> 
-<label for="item_4"></label> <input type="text" id="item_4" placeholder="задача 4"> 
-<label for="item_5"></label> <input type="text" id="item_5" placeholder="задача 5"> 
+<label for="name"></label> <input type="text" id="name" v-model="name" placeholder="название"> 
 
-<button type="submit" class="btr" value="Submit">ДОБАВИТЬ</button>
+<label for="item1"></label> <input type="text" id="item1" v-model="item1" placeholder="задача 1"> 
+<label for="item2"></label> <input type="text" id="item2" v-model="item2" placeholder="задача 2"> 
+<label for="item3"></label> <input type="text" id="item3" v-model="item3" placeholder="задача 3"> 
+<label for="item4"></label> <input type="text" id="item4" v-model="item4" placeholder="задача 4"> 
+<label for="item5"></label> <input type="text" id="item5" v-model="item5" placeholder="задача 5"> 
+
+<button type="submit" class="but" value="Submit">Создать</button>
+
+
+
+
 
 </form>
+
 <ul>
-<li class="error" v-for="error in errors">{{error}}</li>
+<li class="error "v-for="error in errors">{{error}}</li>
 </ul>
 </div>
 
-<ul  id="cols">
+<ul  id="columns">
+<li  class="column">
 <ul class="cards">
-<h3 class="title">vsjehfj</h3>
-<li class="col_1">dbcjkSBjkb</li>
+<li v-for="card in column1"><card :name="card.name" :column=1 :block="blockOne" :card_id="card.card_id" :count_of_checked="card.count_of_checked" :items="card.items" @to-two="toColumnTwo" >   </card></li>
 </ul>
+</li>
 
-<ul>
-<h3 class="title">vsjehfj</h3>
-<li class="col_2">efwaef</li>
-</ul>
 
+<li class="column">
 <ul>
-<h3 class="title">vsjehfj</h3>
-<li  class="col_3">awefwaef</li>
+<li  v-for="card in column2"><card :name="card.name" :column=2 :block=false :card_id="card.card_id" :count_of_checked="card.count_of_checked" :items="card.items" @to-three="toColumnThree" @to-one="toColumnOne" >  ></card></li>
 </ul>
+</li>
+
+
+
+<li class="column">
+<ul>
+<li  v-for="card in column3"><card class="done_card" :name="card.name" :pblock=true :dat="card.dat" :card_id="card.card_id" :column=3 :items="card.items" ></card></li>
+</ul>
+</li>
+
+
 
 </ul>
 </div>
     `,
-    data(){
+    data() {
         return{
-            col_1:[],
-            col_2:[],
-            col_3:[],
-            allCols:[],
-            cards:[],
-            name:[],
-            item_1:[],
-            item_2:[],
-            item_3:[],
-            item_4:[],
-            item_5:[],
-            items:[],
-            errors:[],
-            card_id:0,
-            blockOne:false
+            column1:[],
+            column2:[],
+            column3:[],
+           
 
+            allColumns:[],
+            cards:[],
+
+            name:null,
+            item1:null,
+            item2:null,
+            item3:null,
+            item4:null,
+            item5:null,
+            
+            items:[],
+
+            errors:[],
+
+            card_id:0,
+
+            blockOne:false,
+            
         }
     },
     mounted(){
-        if(localStorage.getItem('allCols')){
-            try{
-                this.allCols=JSON.parse(localStorage.getItem('allCols'));
-                this.col_1=this.allCols[0]
-                this.col_2=this.allCols[1]
-                this.col_3=this.allCols[2]
+            if (localStorage.getItem('allColumns')) {
+                  try {
+                    this.allColumns = JSON.parse(localStorage.getItem('allColumns'));
+                    this.column1 = this.allColumns[0]
+                    this.column2 = this.allColumns[1]
+                    this.column3 = this.allColumns[2]
+                
+                    this.blockOne = this.allColumns[4]
+                  } catch(e) {
+                    localStorage.removeItem('allColumns');
+                  }
             }
-            catch(e){
-                localStorage.removeItem('allCols');
-            }
-        }
+            
+   
     },
     watch:{
-        col_1(){
-            allCols=[this.col_1, this,col_2, this.col_3, this.blockOne]
-            const parsed=JSON.stringify(this.allCols);
-            localStorage.setItem('allCols', parsed);
+        column1(){
+              this.allColumns = [this.column1,this.column2,this.column3,  this.blockOne]
+              
+  
+  
+  
+  
+              const parsed = JSON.stringify(this.allColumns);
+              localStorage.setItem('allColumns', parsed);
+  
+  
         },
-        col_2(){
-            allCols=[this.col_1, this,col_2, this.col_3, this.blockOne]
-            const parsed=JSON.stringify(this.allCols);
-            localStorage.setItem('allCols', parsed);
+        column2(){
+              allColumns = [this.column1, this.column2, this.column3,  this.blockOne]
+  
+              
+              const parsed = JSON.stringify(this.allColumns);
+              localStorage.setItem('allColumns', parsed);
+  
         },
-        col_3(){
-            allCols=[this.col_1, this,col_2, this.col_3, this.blockOne]
-            const parsed=JSON.stringify(this.allCols);
-            localStorage.setItem('allCols', parsed);
-        }
-    },
+        column3(){
+              allColumns = [this.column1, this.column2, this.column3,  this.blockOne]
+  
+              
+              const parsed = JSON.stringify(this.allColumns);
+              localStorage.setItem('allColumns', parsed);
+        },
+        
+  },  
     methods:{
         onSubmit(){
             this.errors=[]
             this.items=[]
-            if(this.item_1){
-                this.items.push([this.item_1, false])
+            if(this.item1){
+                this.items.push([this.item1,false])
             }
-            if(this.item_2){
-                this.items.push([this.item_2, false])
+            if(this.item2){
+                this.items.push([this.item2,false])
             }
-            if(this.item_3){
-                this.items.push([this.item_3, false])
+            if(this.item3){
+                this.items.push([this.item3,false])
             }
-            if(this.item_4){
-                this.items.push([this.item_4, false])
+            if(this.item4){
+                this.items.push([this.item4,false])
             }
-            if(this.item_5){
-                this.items.push([this.item_5, false])
+            if(this.item5){
+                this.items.push([this.item5,false])
             }
-            if(this.items < 3){
-                this.errors.push("ОТ 3 ЗАДАЧ")
+            
+            if(this.items.length < 3){
+                this.errors.push("Должно быть заполнено от 3 пунктов")
             }
             if(!this.name){
-                this.errors.push("ВВЕДИТЕ НАЗВАНИЕ")
+                this.errors.push("Не введён заголовок")
             }
-            if(this.col_1.lenght>=3){
-                this.errors.push("ВЫПОЛНИТЕ ЗАДАЧИ В 1 СТОЛБЦЕ")
+            if(this.column1.length >=3){
+                this.errors.push("Достигнуто максимальное число карточек")                
             }
             if(this.blockOne){
-                this.errors.push("ВЫПОЛНИТЕ ЗАДАЧИ ВО 2 СТОЛБЦЕ")
+                this.errors.push("Второй столбец переполнен")
             }
-            if(this.errors.lenght==0){
-                let info={
+            if(this.errors.length==0){
+                let info = {
                     name:this.name,
                     items:this.items,
-                    card_id:card_id,
-                    count_of_cheked:0,
+                    card_id:this.card_id,
+                    count_of_checked:0,
                 }
-                this.card+=1;
-                this.col_1.push(info)
-            }
-        }
-    },
-    toColOne(name,items, card_id,count_of_checked){
-        if(this.col_1.length<3){
-            let info = {
-                name:name,
-                items:items,
-                card_id:card_id,
-                count_of_checked:count_of_checked
-            }
-            for(i in this.col_2){
-                
-                if(this.col_2[i].card_id==card_id){
-                    this.col_2.splice(i, 1)
-                    break
-                }
+                this.card_id +=1;
+                this.column1.push(info)
+
             }
 
-            this.col_1.push(info)
-        }
 
-    },
-    toColTwo(name,items, card_id,count_of_checked){
-        if(this.col_2.length==5){
-            this.blockOne = true;
-        }
-        else{
-            let info = {
-                name:name,
-                items:items,
-                card_id:card_id,
-                count_of_checked:count_of_checked
-            }
-            for(i in this.col_1){
-                
-                if(this.col_1[i].card_id==card_id){
-                    this.col_1.splice(i, 1)
-                    break
-                }
-            }
 
-            this.col_2.push(info)
-        }
-        let checks = 1;
-        eventBus.$emit('checkTwo',checks) 
-
-    },
-    toColThree(name, items, card_id){
-        let info={
-            name:name,
-            card_id:card_id,
-            items:items,
-            
-        }
-        for(i in this.col_2){
-            if(this.col_2[i].card_id==card_id){
-                this.col_2.splice(i, 1)
-                break
-            }
-        }
-        this.col_3.push(info)
-        this.blockOne=false;
-        let checks=1;
-        eventBus.$emit('checkOne', checks)
-    }
-    
- 
-});
-
-Vue.component("card", {
-    template: `
-    <div class="card">
-    <h4>{{name}}</h4>
-    <ul>
-    <li>dhvshjrg</li>
-    </ul>
-    
-    </div>
-    `,
-    data(){
-        return{}
-    },
-    methods:{
-        updatechecked(item){
-            this.count_of_checked+=1;
-            for(i in this.items){
-                if(this.items[i][0]==item && this.items[i][1]!=true){
-                    this.items[i][1]=true
-                    break
-                }
-            }
-            if((this.count_of_task)==(this.count_of_checked)){
-                
-                console.log(this.name, this.items, this.card_id)
-                this.$emit("to-three", this.name, this.items, this.card_id);
-            }
-            else if((this.count_of_task/2)<=(this.count_of_checked)){
-                this.$emit("to-two",this.name, this.items, this.card_id, this.count_of_checked);
-            }
         },
-        updatetwo(item){
-            this.count_of_checked-=1;
-            if(this.col==2 || this.col==1){
-                for(i in this.items){
-                    if(this.items[i][0]==item && this.items[i][1]==true){
-                        this.items[i][1]=false
+        toColumnOne(name,items, card_id,count_of_checked){
+            if(this.column1.length<3){
+                let info = {
+                    name:name,
+                    items:items,
+                    card_id:card_id,
+                    count_of_checked:count_of_checked
+                }
+                for(i in this.column2){
+                    
+                    if(this.column2[i].card_id==card_id){
+                        this.column2.splice(i, 1)
                         break
                     }
                 }
-                if(this.col==2){
-                    if((this.count_of_task/2)>(this.count_of_checked)){
-                        this.$emit("to-one",this.name, this.items, this.card_id, this.count_of_checked);
+
+                this.column1.push(info)
+            }
+
+        },
+        toColumnTwo(name,items, card_id,count_of_checked){
+            if(this.column2.length==5){
+                this.blockOne = true;
+            }
+            else{
+                let info = {
+                    name:name,
+                    items:items,
+                    card_id:card_id,
+                    count_of_checked:count_of_checked
+                }
+                for(i in this.column1){
+                    
+                    if(this.column1[i].card_id==card_id){
+                        this.column1.splice(i, 1)
+                        break
+                    }
+                }
+
+                this.column2.push(info)
+            }
+            let checks = 1;
+            eventBus.$emit('checkTwo',checks)
+
+        },
+        toColumnThree(name,items, card_id,now){
+            let info = {
+                name:name,
+                items:items,
+                card_id:card_id,
+                dat:now,
+            }
+            for(i in this.column2){
+                
+                if(this.column2[i].card_id==card_id){
+                    this.column2.splice(i, 1)
+                    break
+                }
+            }
+
+            this.column3.push(info)
+            this.blockOne =false;
+            let checks = 1;
+            eventBus.$emit('checkOne',checks)
+        },
+
+       
+    }
+});
+
+
+Vue.component("card", {
+    template: `
+<div class="card">
+<h3>{{name}}</h3>
+<ul >
+<li v-for="item in items"><task :block="block" :item="item[0]" :pblock="pblock" :done="item[1]" @checked="updatechecked" @updatetwo="updatetwo"></task></li>
+</ul>
+
+<p>{{dat}}</p>
+</div>
+    `,
+    data() {
+        return{
+        }
+    },
+    methods: {
+        updatechecked(item) {
+        this.count_of_checked+=1;
+
+        for(i in this.items){
+            if(this.items[i][0]==item && this.items[i][1] != true){
+                this.items[i][1] = true
+                break
+            }
+        }    
+        if ((this.count_of_tasks) == (this.count_of_checked)){
+        var now = new Date() 
+        now = String(now);
+        console.log(this.name,this.items,this.card_id,now)
+        this.$emit("to-three",this.name,this.items,this.card_id,now);
+        }
+        else if ((this.count_of_tasks/2) <= (this.count_of_checked)){
+        this.$emit("to-two",this.name,this.items,this.card_id, this.count_of_checked);
+        }
+    },
+    updatetwo(item){
+        this.count_of_checked-=1;
+        if(this.column==2 || this.column==1){
+            for(i in this.items){
+                if(this.items[i][0]==item && this.items[i][1] == true){
+                    this.items[i][1] = false
+                    break
+                }
+            }
+            if(this.column==2){
+                if ((this.count_of_tasks/2) > (this.count_of_checked)){
+                    this.$emit("to-one",this.name,this.items,this.card_id, this.count_of_checked);
+                    }
+            }           
+        }
+    },
+   
+    },
+    mounted() {
+        eventBus.$on('checkOne',checks => {
+            this.count_of_checked = 0
+            for(i in this.items){
+                if(this.items[i][1] == true){
+                    this.count_of_checked += 1
+                }
+            }    
+            
+            if ((this.count_of_tasks/2) <= (this.count_of_checked) && (this.count_of_tasks) != (this.count_of_checked)){
+            this.$emit("to-two",this.name,this.items,this.card_id, this.count_of_checked);
+        }
+            
+        })
+        eventBus.$on('checkTwo',checks => {
+            this.count_of_checked = 0
+            for(i in this.items){
+                if(this.items[i][1] == true){
+                    this.count_of_checked += 1
+                }
+            }    
+            
+            if ((this.count_of_tasks/2) > (this.count_of_checked)){
+            this.$emit("to-one",this.name,this.items,this.card_id, this.count_of_checked);
+        }  
+        })
+
+
+    },
+    props:{
+        name:{
+            type:String,
+            required:false,
+        },
+        items:{
+            type:Array,
+            required:false,
+        },
+        card_id:{
+            type:Number,
+            required:false,
+        },
+        count_of_checked:{
+            type:Number,
+            required:false,
+        },
+        dat:{
+            type:String,
+            required:false,
+        },
+        block:{
+            type:Boolean,
+            required:false
+        },
+        column:{
+            type:Number,
+            required:false,
+        },
+        pblock:{
+            tupe:Boolean,
+            required:false
+        }
+        
+    },
+    computed: {
+        count_of_tasks() {
+          return this.items.length;
+        },
+    }
+});
+
+
+
+Vue.component("task", {
+    template: `
+<div class="task" 
+@click="check"
+:class="{done:done}">{{item}}</div>
+    `,
+    data() {
+        return{
+            
+        }
+    },
+    props:{
+        item:{
+            type: String,
+            required:false,
+        },
+        done:{
+            type: Boolean,
+            required:false,
+        },
+        block:{
+            type: Boolean,
+            required:false,
+        },       
+        pblock:{
+            tupe:Boolean,
+            required:false
+        }
+    },
+    methods:{
+        check(){
+            if(!this.pblock){
+                if(!this.done){
+                    if(!this.block){
+                        this.done=true
+                        this.$emit("checked",this.item);
+                    }
+                }
+                else{
+                    if(!this.block){
+                        this.done=false
+                        this.$emit("updatetwo",this.item);
                     }
                 }
             }
-        },
-    }
 
-})
+
+        }
+
+    }
+});
+
 
 
 

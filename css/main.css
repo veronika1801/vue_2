@@ -1,57 +1,100 @@
 body{
     width: 100%;
-    background-color: rgb(242, 224, 253);
+    flex-grow:1;
 }
-.board{
+
+#columns{
     display: flex;
-    flex-direction: row;   
+    flex-direction: row;
+    justify-content: space-around;
+    height: 100%;  
+    width: 100%; 
+}
+
+.column{
+    min-height: 1000px;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+    width: 400px;
+    height: 100%;
+    background-color: #686868;
+    border: 2px solid #00B897;
+    flex-grow:1;
+
+}
+.error{
+    font-weight: bolder;
+    padding: 10px 0;
+    margin: 0;
 }
 .form{
-    width: 250px;
-    background-color: white;
-    padding: 30px;
-    border-radius: 20px;
-    height: 400px;
-    margin-top: 35px;
+    display: flex;
+    flex-direction: row;   
+    justify-content: center;
+    align-items: center;
+    gap: 20px
 }
+
 form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-width: 15%;
     align-items: center;
-    gap: 10px;
-}
-.btr{
-    background-color: rgb(248, 172, 255);
-    border: none;
-    height: 30px;
-    width: 235px;
-    border-radius: 7px;
-    border: none;
-    
+    border: 2px solid #00B897;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background-color: white;
+    color: #00B897  ;
 }
 input{
-    height: 30px;
-    width: 230px;
-    border-radius: 7px;
-    border: 1px solid black;
+    max-width: 90%;
+    border-radius: 4px;
 }
-#cols{
-    display: flex;
-    flex-direction: row; 
+
+label{
+    padding: 10px 5px 5px 10px;
+}
+
+ul{
     list-style-type: none;
-    
+    padding: 0;
 }
-.col_1, .col_2, .col_3{
+li{
+    margin-top: 5px;
+}
+
+.done{
+    color: #00B897;
+}
+
+.card{
+    border: 2px solid #00B897;
+    border-radius: 4px;
     background-color: white;
-    width: 300px;
-    padding-left: 50px;
-    height: 500px;
-    border-radius: 20px;
-    list-style-type: none;
+    user-select: none;
 }
-.title{
-    display: flex;
-    text-align: center;
-    justify-content: center;
+
+.input{
+    outline: none;
+}
+
+.but{
+    background-color: #00B897;
+    border: none;
+    margin-top: 5px;
+    font-size: 20px;
+    color: white;
+}
+
+.clear{
+    background-color: #00B897;
+    border: none;
+    font-size: 20px;
+    color: white;
+    margin-top: 20px;
+}
+
+h3{
+    border-bottom: 2px dashed #00B897;
 }
