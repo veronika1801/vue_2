@@ -234,7 +234,22 @@ Vue.component("card", {
                 this.$emit("to-two",this.name, this.items, this.card_id, this.count_of_checked);
             }
         },
-        
+        updatetwo(item){
+            this.count_of_checked-=1;
+            if(this.col==2 || this.col==1){
+                for(i in this.items){
+                    if(this.items[i][0]==item && this.items[i][1]==true){
+                        this.items[i][1]=false
+                        break
+                    }
+                }
+                if(this.col==2){
+                    if((this.count_of_task/2)>(this.count_of_checked)){
+                        this.$emit("to-one",this.name, this.items, this.card_id, this.count_of_checked);
+                    }
+                }
+            }
+        },
     }
 
 })
