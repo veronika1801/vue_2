@@ -101,3 +101,10 @@ h2{
 .date{
    padding-left: 30px;
 }
+.btr{
+    border: 1px solid black;
+    height: 30px;
+    width: 150px;
+    border-radius: 7px;
+    margin-left: 45px;
+}

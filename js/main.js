@@ -297,7 +297,7 @@ Vue.component("card", {
     </ul>
 
     <div>
-    <button v-if="column==1||column==2" v-on:click="editable">Редактировать</button>
+    <button class="btr" v-if="column==1||column==2" v-on:click="editable">Редактировать</button>
     <form v-if="edit">
     <div id="redact">
         <input type="text" placeholder="Название" v-model="namenew">
